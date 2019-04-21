@@ -1,28 +1,23 @@
 package com.elad.framework.component;
 
-import com.elad.framework.interfaces.IStateContext;
+import com.elad.framework.interfaces.StateContext;
 import com.elad.framework.interfaces.Observer;
 
 public abstract class State implements Observer {
 
-    private String name;
-    private IStateContext context;
-
-    public State(String name) {
-        this.name = name;
-    }
+    private StateContext context;
 
     protected void setNextState(State state) {
-        System.out.println("Changing state to: {0}" + state);
+        System.out.println("Changing state to: " + state);
         context.changeState(state);
     }
 
     @Override
     public String toString() {
-        return "state" + this.name;
+        return getClass().getSimpleName();
     }
 
-    public void setContext(IStateContext context) {
+    public void setContext(StateContext context) {
         this.context = context;
     }
 }

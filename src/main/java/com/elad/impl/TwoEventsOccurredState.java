@@ -3,12 +3,11 @@ package com.elad.impl;
 import com.elad.framework.component.Event;
 import com.elad.framework.component.State;
 
-public class ThirdState extends State {
+public class TwoEventsOccurredState extends State {
 
     private final Event event;
 
-    public ThirdState(String name, Event event) {
-        super(name);
+    public TwoEventsOccurredState(Event event) {
         this.event = event;
     }
 
@@ -16,9 +15,9 @@ public class ThirdState extends State {
         if (this.event.getClass() == event.getClass()) {
             String eventType = event.getClass().getSimpleName();
             System.out.println("WARNING: Got 3 events of type: " + eventType);
-            setNextState(new ThirdState("C", event));
+            setNextState(new FinalState());
         } else {
-            setNextState(new FirstState("A"));
+            setNextState(new OneEventsOccurredState(event));
         }
     }
 }
