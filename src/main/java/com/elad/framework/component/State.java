@@ -3,7 +3,9 @@ package com.elad.framework.component;
 import com.elad.framework.interfaces.StateContext;
 import com.elad.framework.interfaces.Observer;
 
-public abstract class State implements Observer {
+import java.io.Serializable;
+
+public abstract class State implements Observer, Serializable {
 
     private StateContext context;
 

@@ -1,4 +1,4 @@
-package com.elad.impl;
+package com.elad.basic;
 
 import com.elad.framework.component.Event;
 
