@@ -1,4 +1,4 @@
-package com.elad.framework.component;
+package com.elad.framework.components;
 
 import com.elad.framework.interfaces.StateContext;
 import com.elad.framework.interfaces.Observer;

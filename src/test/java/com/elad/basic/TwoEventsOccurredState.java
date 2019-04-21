@@ -1,7 +1,7 @@
 package com.elad.basic;
 
-import com.elad.framework.component.Event;
-import com.elad.framework.component.State;
+import com.elad.framework.components.Event;
+import com.elad.framework.components.State;
 
 public class TwoEventsOccurredState extends State {
 

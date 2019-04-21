@@ -1,4 +1,4 @@
-package com.elad.framework.component;
+package com.elad.framework.components;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

@@ -1,6 +1,6 @@
 package com.elad.basic;
 
-import com.elad.framework.component.Machine;
+import com.elad.framework.components.Machine;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

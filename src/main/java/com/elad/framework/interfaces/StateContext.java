@@ -1,6 +1,6 @@
 package com.elad.framework.interfaces;
 
-import com.elad.framework.component.State;
+import com.elad.framework.components.State;
 
 public interface StateContext {
 
