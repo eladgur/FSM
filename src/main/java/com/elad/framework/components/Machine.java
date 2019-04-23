@@ -9,27 +9,6 @@ public class Machine implements Observer, StateContext, Serializable {
 
     private State state;
 
-    public static Machine loadFromFile(String fileName) throws InstantiationException {
-        String errorMsg = "Machine: Fail to load machine from file: " + fileName;
-        Machine machine = null;
-
-        try {
-            FileInputStream fileInputStream = new FileInputStream(fileName);
-            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-            machine = (Machine) objectInputStream.readObject();
-            objectInputStream.close();
-        } catch (IOException | ClassNotFoundException e) {
-            System.out.println("Machine: got exception while loading from file: " + e);
-            e.printStackTrace();
-        }
-
-        if (machine == null) {
-            throw new InstantiationException(errorMsg);
-        } else {
-            return machine;
-        }
-    }
-
     public Machine(State initialState) {
         initialState.setContext(this);
         state = initialState;
@@ -57,6 +36,27 @@ public class Machine implements Observer, StateContext, Serializable {
         } catch (IOException e) {
             System.out.println("Machine: Fail to save state");
             e.printStackTrace();
+        }
+    }
+
+    public static Machine loadFromFile(String fileName) throws InstantiationException {
+        String errorMsg = "Machine: Fail to load machine from file: " + fileName;
+        Machine machine = null;
+
+        try {
+            FileInputStream fileInputStream = new FileInputStream(fileName);
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            machine = (Machine) objectInputStream.readObject();
+            objectInputStream.close();
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Machine: got exception while loading from file: " + e);
+            e.printStackTrace();
+        }
+
+        if (machine == null) {
+            throw new InstantiationException(errorMsg);
+        } else {
+            return machine;
         }
     }
 }
