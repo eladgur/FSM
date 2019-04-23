@@ -1,10 +1,11 @@
 package com.elad.framework.components;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public abstract class Event {
+public abstract class Event implements Serializable {
 
     private String id;
     private Date date;

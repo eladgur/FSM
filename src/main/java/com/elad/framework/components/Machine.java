@@ -7,11 +7,27 @@ import java.io.*;
 
 public class Machine implements Observer, StateContext, Serializable {
 
-    private static final String STATE_FILE_NAME = "state.ser";
     private State state;
 
-    public Machine() {
-        loadState();
+    public static Machine loadFromFile(String fileName) throws InstantiationException {
+        String errorMsg = "Machine: Fail to load machine from file: " + fileName;
+        Machine machine = null;
+
+        try {
+            FileInputStream fileInputStream = new FileInputStream(fileName);
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            machine = (Machine) objectInputStream.readObject();
+            objectInputStream.close();
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Machine: got exception while loading from file: " + e);
+            e.printStackTrace();
+        }
+
+        if (machine == null) {
+            throw new InstantiationException(errorMsg);
+        } else {
+            return machine;
+        }
     }
 
     public Machine(State initialState) {
@@ -32,39 +48,15 @@ public class Machine implements Observer, StateContext, Serializable {
         return state;
     }
 
-    public void saveState() {
+    public void saveToFile(String fileName) {
         try {
-            FileOutputStream fileOutputStream = new FileOutputStream(STATE_FILE_NAME);
+            FileOutputStream fileOutputStream = new FileOutputStream(fileName);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            objectOutputStream.writeObject(state);
+            objectOutputStream.writeObject(this);
             objectOutputStream.close();
         } catch (IOException e) {
             System.out.println("Machine: Fail to save state");
             e.printStackTrace();
-        }
-    }
-
-    private void loadState() {
-        String errorMsg = "Machine: Fail to load state";
-        boolean succeed = false;
-        State state = null;
-
-        try {
-            FileInputStream fileInputStream = new FileInputStream(STATE_FILE_NAME);
-            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-            state = (State) objectInputStream.readObject();
-            objectInputStream.close();
-            succeed = state == null ? false : true;
-        } catch (IOException | ClassNotFoundException e) {
-            System.out.println("Machine: got exception: " + e);
-            e.printStackTrace();
-        }
-
-        if (succeed) {
-            System.out.println("read state: " + state);
-            changeState(state);
-        } else {
-            System.out.println(errorMsg);
         }
     }
 }
